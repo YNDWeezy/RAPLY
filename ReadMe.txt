@@ -16,6 +16,8 @@ Instagram : https://www.instagram.com/yndweezy/
 Chaîne YouTube : https://www.youtube.com/@YNDWeezy
 
 
+IMPORTANT!
+Il faut créer les dossiers "banner", "upload", "users". Le dossier miniature est déjà présent.
 
 
 CREATE TABLE users (
