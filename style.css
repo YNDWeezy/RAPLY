@@ -1,0 +1,1005 @@
+* {
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0 !important;
+    --color-background: #141414;
+    --color-primary: #E50914;
+    user-select: none;
+}
+
+body {
+    background-color: rgb(20, 20, 20);
+    font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Pour Webkit (Chrome, Safari) */
+
+/* Cache la barre de défilement par défaut */
+::-webkit-scrollbar {
+    width: 12px; /* Largeur de la barre de défilement */
+}
+
+/* La piste (background) de la barre */
+::-webkit-scrollbar-track {
+    background: #2a2a2a; /* Couleur de fond sombre */
+    border-radius: 10px;
+}
+
+/* La barre de défilement elle-même */
+::-webkit-scrollbar-thumb {
+    background-color: #555; /* Couleur de la barre de défilement */
+    border-radius: 10px;
+    border: 2px solid #2a2a2a; /* Ajout d'une bordure pour que la barre ne touche pas directement le bord de la fenêtre */
+}
+
+/* Au survol de la barre de défilement */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #888;
+}
+
+/* Pour Firefox */
+scrollbar-width: thin; /* largeur de la barre de défilement */
+scrollbar-color: #555 #2a2a2a; /* couleur de la barre de défilement et couleur de fond */
+
+
+ /* YND WEEZY RAPPEL ICI */
+.watch-video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.watch-video:fullscreen {
+    width: 100%;
+    height: 100%;
+}
+
+
+.hidden {
+    display: none;
+}
+
+.hide-controls .video-controls {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+
+
+/* Assurez-vous que le conteneur de la vidéo s'étend à toute la largeur et hauteur disponibles */
+.video-view {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* cela prendra toute la hauteur de la fenêtre */
+    overflow: hidden; /* cache tout ce qui dépasse du conteneur */
+}
+
+/* Fait en sorte que la vidéo remplisse le conteneur tout en maintenant son rapport d'aspect */
+#videoElement {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+}
+
+
+video#videoElement {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Changé de fill à cover */
+}
+
+
+
+
+.progress .progress-bar {
+    position: absolute;
+    width: 93%;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.progress .progress-completed {
+    position: absolute;
+    height: 4px;
+    background-color: #00FF83;
+}
+
+.progress .progress-completed::after {
+    content: "";
+    height: 16px;
+    width: 16px;
+    position: absolute;
+    margin-top: -6px;
+    right: -8px;
+    border-radius: 16px;
+    background-color: #00FF83;
+}
+
+.progress .progress-loaded {
+    position: absolute;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+
+
+
+.toprow {
+    display: inline-flex;
+}
+
+.video-controls {
+    position: absolute;
+    height: 130px;
+    width: 100%;
+    bottom: 0;
+    padding-left: 20px;
+}
+
+
+
+.timecode {
+    position: absolute;
+    margin-top: -6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    left: 94%;
+    width: 5%;
+}
+
+.progress {
+    width: 1804px;
+    height: 4px;
+    cursor: pointer;
+}
+
+.progress:hover>.progress-bar {
+    height: 8px;
+    transition: .1s;
+    margin-top: -2px;
+}
+
+.progress:hover>.progress-bar>span {
+    height: 8px;
+    transition: .1s;
+}
+
+.progress:hover>.progress-bar>.progress-completed::after {
+    margin-top: -4px;
+    transition: .1s
+}
+
+#carret {
+    height: 8px;
+    position: absolute;
+    width: 2px;
+    background-color: #fff;
+    margin-top: -2px;
+}
+
+#carret .text {
+    width: 120px;
+    background-color: #262626;
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+    padding: 5px 0px;
+    position: absolute;
+    z-index: 1;
+    bottom: 200%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+#carret .text::after {
+    content: " ";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #fff transparent transparent transparent;
+}
+
+
+.lowrow {
+    display: flex;
+    flex-direction: row;
+	margin-top: 30px;
+    flex-wrap: nowrap; /* empêche les éléments de passer à la ligne suivante */
+    align-items: center; /* aligne les éléments verticalement au centre */
+    justify-content: space-between; /* distribue l'espace uniformément entre les éléments */
+}
+
+.lowrow .left{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* distribue l'espace uniformément entre les éléments */
+}
+.lowrow .middle{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.lowrow .right{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+	margin-right: 1vw;
+}
+.controls svg{
+    color: #fff;
+    width: 44px;
+    height: 44px;
+    transition: .2s;
+}
+
+.controls:hover svg{
+    transform: scale(1.3);
+    transition: .2s;
+}
+.controls{
+    margin-right: 25px;
+    cursor: pointer;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    position: relative;  /* Ajouté pour le positionnement de .volume-bar */
+}
+.volume-bg {
+    width: 30px;
+    height: 120px;
+    background-color: #262626; /* Barre gris sidéral pour mon volume */
+    border-radius: 4px;
+    bottom: 45px;  
+    left: 50%;
+    position: absolute;
+    z-index: 1;
+    transform: translateX(-50%); /* Pour centrer par rapport à la position de left: 50% */
+    display: none; /* Pour le cacher initialement */
+}
+
+.volume-bar {
+    width: 20%;
+    height: 100px;
+    background: #fff;
+    border-radius: 4px;
+    bottom: 55px;
+    left: 50%;
+    position: absolute;
+    z-index: 2;
+    transform: translateX(-50%); /* Pour centrer par rapport à la position de left: 50% */
+    display: none;
+}
+
+.volume-level {
+    width: 100%;
+    height: 100%;
+    background: #00FF83;
+    position: absolute;
+    bottom: 0px;
+    border-radius: 4px;
+    z-index: 3;
+}
+
+#id_volume svg {
+    margin: 0;
+    padding: 0;
+}
+
+#id_volume:hover .volume-bar,
+#id_volume:hover .volume-bg { /* Affiche les deux éléments lorsque vous survolez id_volume */
+    display: block;
+}
+
+
+
+
+
+#tooltip {
+    position: absolute;
+    background-color: #333;
+	color: #fff;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 12px;
+    display: none;
+    pointer-events: none; /*Pour s'assurer que le tooltip ne perturbe pas d'autres interactions*/
+}
+#previewCanvas {
+    position: absolute;
+    display: none;
+    width: 160px;
+    height: 90px; 
+    border: 1px solid #ccc;
+    pointer-events: none; /* Pour s'assurer que le canvas ne perturbe pas d'autres interactions */
+}
+
+
+
+/* Styles généraux */
+.watch-video--player-view {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: #000;
+    overflow: hidden;
+}
+
+.back-icon {
+    position: absolute;
+    top: 9%;
+    left: 2%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 10;
+}
+
+.back-icon svg {
+    fill: none;
+    stroke: #FFF;
+    transition: none;  /* Suppression de l'animation */
+}
+
+.back-icon a {
+    display: inline-block;
+    text-decoration: none;
+}
+
+
+.hide-controls .controls {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+
+
+
+
+.speed-selection-box {
+    position: absolute;
+    bottom: 50%;
+    right: 0;
+    margin-bottom: 24px; 
+    background-color: #282828;
+    border: 1px solid #555;
+    padding: 25px; 
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 350px; 
+    display: none;
+}
+
+.title {
+    color: #fff;
+    margin-bottom: 30px; 
+    font-weight: bold;
+    font-size: 1.5em; /* Augmentation de la taille de la police */
+}
+
+.speeds {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px; /* Augmentation de la hauteur */
+	
+}
+
+.speed-line {
+    position: absolute;
+    top: 10%; /* Ajustement pour positionner au centre */
+    left: 2%;
+    right: 2%;
+    height: 4px; /* Réduction de la hauteur */
+    background-color: #00FF83;
+    z-index: 0;
+    transform: translateY(-50%);
+}
+
+.speed-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+.indicator {
+    width: 24px;
+    height: 24px; /* Ajustement pour un cercle parfait */
+    border-radius: 50%;
+    background-color: #20B97A;
+    position: relative;
+    z-index: 2; /* Augmentation de la z-index pour s'assurer qu'il est au-dessus de la speed-line */
+    transition: transform 0.2s;
+}
+
+.indicator::after {
+    content: "";
+    display: block;
+    width: 34px; /* Ajustement pour le contour */
+    height: 34px;
+    border: 3px solid #00FF83; /* Ajustement de l'épaisseur du contour */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+    transition: transform 0.2s;
+}
+
+.indicator.selected::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.speed-option span {
+    color: #fff;
+    margin-top: 15px;
+    font-size: 1.2em;
+}
+.Hawkins-Icon {
+    transition: all 0.3s ease;
+}
+
+/* Animation pour remplir le cœur */
+@keyframes fillHeart {
+    0%   { fill: white; }
+    100% { fill: #00FF83; }
+}
+
+
+/* Quand le cœur est rempli */
+#id_heart.filled #heartPath {
+    animation-name: fillHeart;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    fill: #00FF83;
+}
+
+.heart-filled {
+    fill: #00FF83; /* Couleur verte pour le cœur rempli */
+}
+
+.heart-empty {
+    fill: white; /* Couleur blanche pour le cœur vide */
+}
+
+
+
+
+
+
+
+
+
+/* Style pour les pouces verts */
+.thumb-up {
+    position: absolute;
+    width: 66px; /* Taille du pouce vert */
+    height: 66px; /* Taille du pouce vert */
+    background-image: url('likeicon.png'); /* Chemin vers l'image du pouce vert */
+    background-size: cover;
+    pointer-events: none; /* Pour empêcher l'interaction avec l'élément */
+}
+
+/* Animation pour les pouces verts */
+@keyframes thumbAnimation {
+    0% {
+        transform: scale(0.5) translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1) translateY(-100px); /* Montez de 100 pixels */
+        opacity: 0;
+    }
+}
+
+
+.video-title {
+    text-align: center;
+    font-size: 20px;
+    color: white; /* Couleur du texte en blanc */
+    /* Autres styles CSS si nécessaire */
+}
+.video-title {
+    color: white !important;
+}
+
+
+
+
+
+
+
+/* Modal pour la section commentaire complète ! */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6); /* Fond plus sombre pour un meilleur contraste */
+}
+
+.modal-content {
+
+    background-color: #1a1a1a; /* Gris sidéral comme couleur de fond */
+    color: #fff; /* Couleur de texte blanche pour un bon contraste */
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #333; /* Bordure subtile */
+    border-radius: 15px; /* Coins arrondis pour un effet bulle */
+    width: 60%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5); /* Ombre pour un effet de profondeur */
+    backdrop-filter: blur(50px); /* Effet de flou derrière la modale */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+	margin-right: 5px;
+	padding-left: 10px;
+}
+
+.close:hover,
+.close:focus {
+    color: #66bb6a; /* Changement de couleur au survol */
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.comment-scroll-section {
+    max-height: 400px; /* Hauteur maximale pour la section des commentaires */
+    overflow-y: auto; /* Permettre le défilement vertical */
+    margin-bottom: 20px; /* Espace avant la section de saisie de texte */
+}
+
+.comment-scroll-section {
+    max-height: 400px; /* Hauteur maximale pour la section des commentaires */
+    overflow-y: auto; /* Permettre le défilement vertical */
+    margin-bottom: 20px; /* Espace avant la section de saisie de texte */
+    padding-right: 10px; /* Ajouter un padding à droite pour éloigner la barre de défilement */
+}
+
+.comment-input-section {
+    position: relative; /* Position relative pour garder cette section fixe */
+    margin-right: -15px; /* Compense le padding ajouté à la section de défilement */
+
+}
+
+
+
+.modal-input-section {
+    width: 100%; 
+    display: flex; /* Pour aligner correctement les boutons à côté du champ */
+    flex-direction: column; /* Les éléments s'alignent verticalement */
+}
+
+
+.modal-input {
+    width: 100%;
+    padding: 10px;
+    margin: 0; /* Assurez-vous qu'il n'y a pas de marge supplémentaire */
+    border: none;
+    border-bottom: 2px solid #4CAF50;
+    background-color: transparent;
+    color: #fff;
+    outline: none;
+    resize: none;
+    box-sizing: border-box; /* Inclut padding dans le calcul de la largeur */
+	
+}
+
+.input-and-submit-container {
+    display: flex;
+    justify-content: space-between; /* Répartit l'espace entre les éléments */
+    align-items: center; /* Alignement vertical */
+}
+
+.modal-submit {
+    background-color: #4CAF50; /* Bouton vert */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 20px; /* Ajoutez de la marge à droite pour l'éloigner du bord du modal */
+
+}
+
+
+.modal-submit:hover {
+    background-color: #66bb6a; /* Changement de couleur au survol */
+}
+
+
+.comment-section {
+    background-color: #2a2a2a;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+	position: relative;
+
+}
+
+.comment-details a {
+    color: #4CAF50; /* Couleur verte, ajustez selon votre palette */
+    text-decoration: none; /* Pas de soulignement */
+    transition: transform 0.3s ease; /* Animation de transformation */
+}
+
+.comment-details a:hover {
+    transform: scale(1.1); /* Grossir légèrement au survol */
+}
+
+
+
+
+.like-heart {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.like-count {
+    position: absolute;
+    font-size: 0.8em;
+    color: grey;	
+    top: 35px; /* Ajustez selon la mise en page */
+    right: 10px; /* Ajustez selon la mise en page */
+    cursor: pointer;
+    border-radius: 50%; /* Arrondir les coins pour former un cœur */
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    color: #aaa; /* Couleur grise pour un cœur pas like */
+	will-change: transform, opacity;
+
+}
+
+
+.like-heart {
+    position: absolute;
+    top: 10px; /* Ajustez selon la mise en page */
+    right: 10px; /* Ajustez selon la mise en page */
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 50%; /* Arrondir les coins pour former un cœur */
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    transition: color 0.3s ease;
+    color: #aaa; /* Couleur grise pour un cœur pas like */
+	will-change: transform, opacity;
+}
+
+.like-heart:hover {
+    color: #4CAF50; /* Changement de couleur au survol */
+}
+
+.like-heart.liked {
+    color: #4CAF50; /* Couleur verte pour un cœur aimé */
+}
+
+
+
+.like-heart-reply {
+    position: absolute;
+    top: 10px; /* Ajustez selon la mise en page */
+    right: 10px; /* Ajustez selon la mise en page */
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 50%; /* Arrondir les coins pour former un cœur */
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    transition: color 0.3s ease;
+    color: #aaa; /* Couleur grise pour un cœur pas like */
+	will-change: transform, opacity;
+}
+
+.like-heart-reply:hover {
+    color: #4CAF50; /* Changement de couleur au survol */
+}
+
+.like-heart-reply.liked {
+    color: #4CAF50; /* Couleur verte pour un cœur aimé */
+}
+
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1); /* Réduire l'échelle pour une animation plus subtile */
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.heart-pulse {
+    animation: pulse 0.6s ease-in-out;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+
+.comment-section h4, .comment-section p {
+    margin: 0; /* Retirer les marges par défaut pour un alignement précis */
+}
+
+
+.comment-details {
+    position: relative;
+    flex-grow: 1;
+    margin-left: 10px; /* Espace entre l'image de profil et le texte */
+
+}
+
+.comment-details h4 {
+    font-weight: bold; /* Rend le texte en gras */
+    margin-bottom: 5px; /* Espace entre le nom d'utilisateur et le commentaire */
+}
+
+.comment-details p {
+    font-size: 0.9em; /* Réduire la taille de la police pour les commentaires */
+    line-height: 1.4; /* Espacement de ligne pour une meilleure lisibilité */
+}
+
+
+
+.reply-toggle {
+    background-color: transparent;
+    color: #fff;
+    border: none; /* Retirer les bordures */
+    padding: 5px 15px;
+    margin-top: 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.reply-toggle:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+.reply-toggle {
+    background-color: transparent;
+    color: #fff;
+    padding: 5px 15px;
+    margin-top: 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    align-self: flex-start;
+    margin-left: auto; /* Nouveau : aligner à droite */
+    margin-right: 10px; /* Nouveau : marge à droite */
+    width: 100%; /* Prend toute la largeur */
+
+}
+
+.reply-toggle:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.reply-section {
+    background-color: #3a3a3a;
+    padding: 5px;
+    border-radius: 8px;
+    margin-top: 5px;
+    margin-left: 60px; /* Indentation pour aligner sous le commentaire */
+    border-left: 3px solid #4CAF50; /* Ligne verticale pour indiquer les réponses */
+}
+.comment-container {
+    display: flex;
+    align-items: flex-start; /* Alignement en haut pour tous les éléments */
+}
+
+
+
+.reply-button {
+    background-color: #4CAF50; /* Fond vert */
+    color: white; /* Texte blanc */
+    border: none; /* Pas de bordure */
+    padding: 5px 10px;
+    margin-top: 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.reply-button:hover {
+    background-color: #66bb6a; /* Un vert plus clair au survol */
+}
+
+
+
+
+
+.reply-input-section {
+    display: flex;
+    align-items: center; /* Aligner les éléments verticalement */
+    justify-content: flex-end; /* Aligner les boutons à droite */
+}
+
+
+.reply-input {
+
+    width: 100%;
+    padding: 10px;
+    margin: 0; 
+    border: none;
+    border-bottom: 2px solid #4CAF50;
+    background-color: transparent;
+    color: #fff;
+    outline: none;
+    resize: none;
+    box-sizing: border-box; /* Inclut padding dans le calcul de la largeur */
+}
+
+
+
+/* Style par défaut du bouton Envoyer */
+.send-reply, .cancel-reply {
+    background-color: #4CAF50; /* Fond vert pour les deux boutons */
+    color: white; /* Texte blanc pour les deux boutons */
+    border: none;
+    padding: 10px 20px; 
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.send-reply:hover, .cancel-reply:hover {
+    background-color: #66bb6a; /* Changement de couleur au survol */
+}
+.cancel-reply {
+    background-color: #333; /* Une couleur plus sombre pour le bouton annuler */
+    color: #fff; /* Texte blanc */
+}
+
+
+
+
+.emoji-picker {
+    background: none; /* Pas de fond */
+    border: none; /* Pas de bordure */
+    cursor: pointer;
+    font-size: 20px; /* Taille de l'emoji */
+    padding: 5px; /* Espace autour de l'emoji */
+    margin-left: 10px; /* Espace après le textarea */
+    transition: background-color 0.3s; /* Animation de changement de couleur */
+}
+
+.emoji-picker:hover {
+    color: white; /* Texte blanc au survol */
+}
+
+
+/* MODAL POUR LA SECTION EMOJI */
+
+/* Style global du sélecteur d'emojis */
+.emoji-container {
+    background-color: #2a2a2a; /* Fond sombre */
+    /*border: 3px solid #32a852;  Bordure verte */
+    border-radius: 15px; /* Bordures légèrement arrondies */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 0 10px #32a852; /* Ombre pour la profondeur et lueur verte */
+    color: #fff; /* Texte en blanc */
+    display: flex;
+    flex-direction: row; /* Disposition horizontale */
+    width: 315px; /* Largeur ajustée */
+    height: 350px; /* Hauteur ajustée */
+    overflow: hidden; /* Cache le débordement */
+}
+
+/* Style de la zone d'affichage des emojis */
+.emoji-display-area {
+    flex-grow: 1; /* Occupe l'espace restant */
+    overflow-y: auto; /* Défilement vertical si nécessaire */
+    padding: 10px; /* Espacement intérieur */
+    display: flex;
+    flex-wrap: wrap; /* Répartition sur plusieurs lignes */
+    align-content: flex-start; /* Alignement des lignes en haut */
+}
+
+/* Style des emojis individuels */
+.emoji-display-area span {
+    font-size: 24px; /* Taille des emojis */
+    margin: 4px; /* Espacement réduit */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, border-radius 0.3s; /* Transition pour border-radius */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; /* Largeur fixe pour une forme carrée initiale */
+    height: 30px; /* Hauteur fixe pour une forme carrée initiale */
+    border-radius: 50%; /* Arrondi complet */
+}
+
+.emoji-display-area span:hover {
+    background-color: #3a3a3a; /* Effet au survol */
+    transform: scale(1.2); /* Grossissement léger de l'emoji */
+}
+
+/* Style du menu des catégories (inchangé) */
+.emoji-category-menu {
+    width: 50px; /* Largeur du menu */
+    background-color: #1a1a1a; /* Fond différent pour le distinguer */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px 0; /* Espacement vertical */
+}
+
+/* Style des boutons de catégorie (inchangé) */
+.emoji-category-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px; /* Taille des icônes de catégorie */
+    color: #ccc; /* Couleur des icônes */
+    margin-bottom: 10px; /* Espacement entre les boutons */
+}
+
+.emoji-category-button:hover {
+    color: #66bb6a; /* Couleur au survol */
+}
+

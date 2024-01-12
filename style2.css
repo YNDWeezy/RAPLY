@@ -1,0 +1,191 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+
+
+.thumbnail {
+
+    object-fit: cover; /* Cela permettra de s'assurer que l'image couvre entièrement la zone tout en conservant son aspect */
+    border: 2px solid white;
+    transition: transform 0.3s, border 0.3s, box-shadow 0.3s; /* Ajouté box-shadow à la transition */
+	margin-bottom: 15px; /* Ajout d'une marge au bas de la vignette */
+}
+
+.thumbnail:hover {
+    transform: scale(1.1);
+    border: 2px solid #57ffbb;
+    box-shadow: 0 0 5px #57ffbb, 0 0 10px #57ffbb, 0 0 15px #57ffbb; /* Crée un effet de bordure néon */
+}
+
+.thumbnail:active {
+    transform: scale(1.05);
+    border: 2px solid white;
+}
+
+.center-video .thumbnail:hover {
+    box-shadow: none; /* Pour que la vignette centrale ne montre pas l'effet néon lors du hover */
+}
+
+
+
+
+/* Positionnement central */
+.center-video {
+    z-index: 10;
+    position: relative;
+}
+
+/* Positionnement général pour les vidéos */
+.video-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Positionnement à droite */
+.right-video {
+    z-index: 5;
+    position: absolute;
+    right: 10%; /* Centré par rapport à la vidéo principale */
+    top: 50%; /* Centrage vertical */
+    transform: translateX(50%) translateY(-50%); /* Pour le décaler de 50% de sa propre largeur et le centrer verticalement */
+
+}
+
+/* Positionnement à gauche */
+.left-video {
+    z-index: 5;
+    position: absolute;
+    left: 10%; /* Centré par rapport à la vidéo principale */
+    top: 50%; /* Centrage vertical */
+    transform: translateX(-50%) translateY(-50%); /* Pour le décaler de 50% de sa propre largeur et le centrer verticalement */
+}
+
+
+.center-video .thumbnail, .right-video .thumbnail, .left-video .thumbnail {
+    filter: brightness(0.4);  /* Adaptez la valeur selon le niveau d'assombrissement souhaité */
+}
+
+.center-video .thumbnail:hover,.right-video .thumbnail:hover, .left-video .thumbnail:hover {
+    filter: brightness(1);
+}
+
+.center-video .thumbnail:hover {
+        transform: scale(1.1);
+    border: 2px solid #57ffbb;
+    box-shadow: 0 0 5px #57ffbb, 0 0 10px #57ffbb, 0 0 15px #57ffbb; /* Crée un effet de bordure néon */
+}
+
+
+.swiper-button-next::after, .swiper-button-prev::after {
+    color: #fff; /* Vert Tailwind pour green-500 */
+}
+.swiper-container {
+    overflow-x: hidden;
+}
+
+
+.thumbnail:hover {
+    transform: scale(1.1);
+    border: 3px solid #57ffbb;
+    box-shadow: 0 0 10px #57ffbb, 0 0 20px #57ffbb, 0 0 30px #57ffbb;
+}
+
+
+
+
+#modal {
+    z-index: 50;
+}
+
+
+
+
+
+
+
+/* Pour Webkit (Chrome, Safari) */
+
+/* Cache la barre de défilement par défaut */
+::-webkit-scrollbar {
+    width: 12px; /* Largeur de la barre de défilement */
+}
+
+/* La piste (background) de la barre */
+::-webkit-scrollbar-track {
+    background: #2a2a2a; /* Couleur de fond sombre */
+    border-radius: 10px;
+}
+
+/* La barre de défilement elle-même */
+::-webkit-scrollbar-thumb {
+    background-color: #555; /* Couleur de la barre de défilement */
+    border-radius: 10px;
+    border: 2px solid #2a2a2a; /* Ajout d'une bordure pour que la barre ne touche pas directement le bord de la fenêtre */
+}
+
+/* Au survol de la barre de défilement */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #888;
+}
+
+/* Pour Firefox */
+scrollbar-width: thin; /* largeur de la barre de défilement */
+scrollbar-color: #555 #2a2a2a; /* couleur de la barre de défilement et couleur de fond */
+
+
+
+
+
+.profile-banner {
+    height: 100px; /* Hauteur de la bannière */
+    background-color: #333; /* Couleur de fond si l'image n'est pas chargée */
+    position: relative; /* Ajouté pour le positionnement relatif */
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover; /* Cela garantit que l'image couvre la zone sans être déformée */
+}
+
+
+/* CSS pour masquer le texte par défaut */
+.profile-banner .banner-hover-text {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+/* CSS pour afficher le texte au survol */
+.profile-banner:hover .banner-hover-text {
+    display: flex;
+}
+
+.hidden {
+    display: none;
+}
+
+
+
+.tab-button {
+    transition: border-color 0.3s ease-in-out;
+}
+
+
+
