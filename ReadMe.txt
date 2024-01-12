@@ -16,6 +16,26 @@ Instagram : https://www.instagram.com/yndweezy/
 Chaîne YouTube : https://www.youtube.com/@YNDWeezy
 
 
+
+
+Voici ce que j'ai développé jusqu'à présent.
+
+Page d'Accueil : Elle inclut une section "Tendances" affichant les vidéos les plus visionnées, ainsi qu'une catégorie "Ajouts Récents" pour les nouvelles vidéos.
+
+Fonctionnalités d'Utilisateur :
+
+Connexion et Inscription : 
+Le site intègre un modal (fenêtre pop-up) pour la connexion et l'inscription, qui est déjà opérationnel.
+Page Utilisateur : Chaque utilisateur dispose de sa propre page. Cette page inclut un système de suivi avec les options "Followers" (abonnés) et "Following" (abonnements), ainsi que l'affichage des "Likes" reçus sur l'ensemble de ses vidéos.
+Lecteur Vidéo : Inspiré de Netflix mais personnalisé selon mes idées, ce lecteur vidéo comprend plusieurs fonctionnalités supplémentaires :
+
+Système de Commentaires : Les utilisateurs peuvent mentionner d'autres personnes, répondre pour créer un fil de discussion, et "liker" des commentaires ou réponses.
+Emoji : Un système d'emoji est également intégré au système de commentaires.
+
+
+Pour voir à quoi ressemble le projet : https://discord.gg/KR6ZpbWXk8
+
+
 IMPORTANT!
 Il faut créer les dossiers "banner", "upload", "users". Le dossier miniature est déjà présent.
 
